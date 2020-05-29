@@ -69,6 +69,10 @@ class BookController extends Controller
     }
 
     public function destroy($id){
+        $book = Book::findOrFail($id);
 
+        $book->delete();
+
+        return $this->successResponse($book);
     }
 }
