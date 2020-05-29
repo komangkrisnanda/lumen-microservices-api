@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponser;
+use App\Book;
 
-class ExampleController extends Controller
+class BookController extends Controller
 {
     use ApiResponser;
     /**
@@ -18,7 +19,9 @@ class ExampleController extends Controller
     }
 
     public function index(){
+        $books = Book::all();
 
+        return $this->successResponse($books);
     }
 
     public function store(Request $request){
