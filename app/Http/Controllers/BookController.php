@@ -40,6 +40,11 @@ class BookController extends Controller
         return $this->successResponse($book, Response::HTTP_CREATED);
     }
 
+    public function show($id){
+        $book = Book::findOrFail($id);
+        return $this->successResponse($book);
+    }
+
     public function update(Request $request, $id){
 
     }
