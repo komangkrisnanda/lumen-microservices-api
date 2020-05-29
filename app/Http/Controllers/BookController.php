@@ -46,7 +46,26 @@ class BookController extends Controller
     }
 
     public function update(Request $request, $id){
+        $rules = [
+            'title' => 'max:255',
+            'description' => 'max:255',
+            'price' => 'min:1',
+            'author_id' => 'min:1'
+        ];
 
+        $this->validate($request, $rules);
+
+        $book = Book::findOrFail($id);
+
+        $book->fill($request->all());
+
+        if($book->isClean()){
+            return $this->errorResponse('At least one value must change.', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $book->save();
+
+        return $this->successResponse($book);
     }
 
     public function destroy($id){
