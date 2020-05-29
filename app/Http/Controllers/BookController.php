@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponser;
 use App\Book;
+use Illuminate\Http\Response;
 
 class BookController extends Controller
 {
@@ -25,7 +26,18 @@ class BookController extends Controller
     }
 
     public function store(Request $request){
+        $rules = [
+            'title' => 'required|max:255',
+            'description' => 'required|max:255',
+            'price' => 'required|min:1',
+            'author_id' => 'required|min:1'
+        ];
 
+        $this->validate($request, $rules);
+
+        $book = Book::create($request->all());
+
+        return $this->successResponse($book, Response::HTTP_CREATED);
     }
 
     public function update(Request $request, $id){
