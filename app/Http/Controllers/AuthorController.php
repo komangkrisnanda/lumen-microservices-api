@@ -26,7 +26,7 @@ class AuthorController extends Controller
     }
 
     public function show($id){
-
+        return $this->successResponse($this->authorService->obtainAuthor($id));
     }
 
     public function store(Request $request){
