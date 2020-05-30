@@ -4,12 +4,14 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -62,6 +64,18 @@ class Handler extends ExceptionHandler
 
         if($exception instanceof AuthorizationException){
             return $this->errorResponse($exception->getMessage, Response::HTTP_UNAUTHORIZED);
+        }
+
+        if($exception instanceof AuthenticationException){
+            return $this->errorResponse('Unauthenticated.', 401);
+        }
+
+        if($exception instanceof NotFoundHttpException){
+            return $this->errorResponse('The specified URL cannot be found', 404);
+        }
+
+        if($exception instanceof HttpException){
+            return $this->errorResponse('Unauthorized', $exception->getStatusCode());
         }
 
         if($exception instanceof ValidationException){
