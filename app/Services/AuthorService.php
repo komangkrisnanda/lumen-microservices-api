@@ -36,4 +36,10 @@ class AuthorService{
     public function updateAuthor($data, $id){
         return $this->performRequest("PUT", "/authors/{$id}", $data);
     }
+
+    // Delete author using the author service
+
+    public function deleteAuthor($id){
+        return $this->performRequest("DELETE", "/authors/{$id}");
+    }
 }
