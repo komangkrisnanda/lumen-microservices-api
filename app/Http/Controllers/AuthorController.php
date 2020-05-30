@@ -34,7 +34,7 @@ class AuthorController extends Controller
     }
 
     public function update(Request $request, $id){
-
+        return $this->successResponse($this->authorService->updateAuthor($request->all(), $id));
     }
 
     public function destroy($id){
