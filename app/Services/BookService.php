@@ -9,7 +9,7 @@ class BookService{
 
     public $baseUri;
 
-    public function _construct(){
+    public function __construct(){
         $this->baseUri = config('services.books.base_uri');
     }
 }

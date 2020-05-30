@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Author;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Services\AuthorServices;
+use App\Services\AuthorService;
+use App\Traits\ApiResponser;
 class AuthorController extends Controller
 {
     use ApiResponser;
@@ -21,7 +22,7 @@ class AuthorController extends Controller
     }
 
     public function index(){
-
+        return $this->successResponse($this->authorService->obtainAuthors());
     }
 
     public function show($id){

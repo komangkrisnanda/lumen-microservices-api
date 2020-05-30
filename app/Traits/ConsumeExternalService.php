@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Traits;
+use GuzzleHttp\Client;
+
 trait ConsumeExternalService{
     public function performRequest($method, $requestUrl, $formParams = [], $headers = []){
         $client = new Client([
