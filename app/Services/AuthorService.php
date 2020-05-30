@@ -8,9 +8,11 @@ class AuthorService{
     use ConsumeExternalService;
 
     public $baseUri;
+    public $secret;
 
     public function __construct(){
         $this->baseUri = config('services.authors.base_uri');
+        $this->secret = config('services.authors.secret');
     }
 
     // Obtain the full list of author from the author service
